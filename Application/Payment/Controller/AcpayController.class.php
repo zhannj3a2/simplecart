@@ -4,6 +4,8 @@ use Think\Controller;
 
 class AcpayController extends Controller {
 	public function index() {
-		$this->display();
+		$content = $this->fetch("index");
+		return $content;
+		//return "ddddddd";
 	}
 }

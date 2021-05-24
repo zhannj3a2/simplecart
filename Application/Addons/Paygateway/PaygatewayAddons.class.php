@@ -2,7 +2,9 @@
 namespace Addons\Paygateway;
 class PaygatewayAddons {
 	public function pay_frontoffice() {
-		A("Payment/Acpay")->index();
+		$result = A("Payment/Acpay")->index();
+		//echo "dddd";
+		echo $result;
 	}
 
 	public function pay_backoffice() {

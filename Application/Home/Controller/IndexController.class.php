@@ -5,6 +5,8 @@ use Think\Controller;
 class IndexController extends Controller {
 	public function index() {
 		\Think\Hook::listen("pay_frontoffice", $params);
-		\Think\Hook::listen("pay_backoffice", $params);
+		//\Think\Hook::listen("pay_backoffice", $params);
+		//$result = $this->fetch();
+		//dump($result);
 	}
 }
