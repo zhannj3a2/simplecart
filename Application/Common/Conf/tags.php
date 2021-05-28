@@ -16,9 +16,9 @@ app_end	应用结束标签位
  */
 return [
 	// 添加下面一行定义即可
-	'app_init' => [
-		//'Behaviors\TestBehavior', //行为测试程序
-	],
+	'app_begin' => array(
+		'Behavior\CheckLangBehavior',
+	),
 	'pay_frontoffice' => ['Addons\Paygateway\PaygatewayAddons'],
 	'pay_backoffice' => ['Addons\Paygateway\PaygatewayAddons'],
 ];

@@ -1,0 +1,61 @@
+<layout name="layout" />
+<p>
+    <!-- Button trigger modal -->
+    <a href="__CONTROLLER__/add" class="uk-button uk-button-success">
+        {$Think.lang.add_new}
+    </a>
+</p>
+<form class="uk-form">
+    <div class="uk-grid">
+        <div class="uk-width-1-4">产品标题:
+            <input type="text" name="doc_title" placeholder="" class="uk-width-1-1">
+        </div>
+        <div class="uk-width-1-4">分类:
+            <select name="doc_cat">
+                <option value="">--</option>
+                <volist name=":getObjectList('category','cat_type=3')" id="vo">
+                    <option value="{$vo.cat_id}">{$vo.cat_name}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <p>
+        <button type="submit" class="uk-button uk-button-danger">{$Think.lang.search}</button>
+    </p>
+</form>
+{$page}
+<div class="uk-overflow-container">
+    <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
+        <thead>
+            <th>#</th>
+            <th>产品标题</th>
+            <th>库存</th>
+            <th>价格</th>
+            <th>分类</th>
+            <th>是否可用</th>
+            <th>排序</th>
+            <th>{$Think.lang.add_time}</th>
+            <th>--</th>
+        </thead>
+        <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><a href="__CONTROLLER__/details/{$vo.product_id}">{$vo.product_id}</a></td>
+                    <td>{$vo.product_name|cutStr="30"}</td>
+                    <td>{$vo.product_quantity}</td>
+                    <td>{$vo.product_price}</td>
+                    <td>{$vo.cat_name}</td>
+                    <td>{$vo.product_status|displayIcon}</td>
+                    <td>{$vo.product_sort}</td>
+                    <td>{$vo.product_time}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="uk-icon-trash uk-icon-hover" onclick="confirmDelete('__CONTROLLER__/deleteHandle/{$vo.product_id}')">
+                        </a>
+                    </td>
+                </tr>
+            </volist>
+        </tbody>
+    </table>
+</div>
+{$page}
+<div style="clear:both"></div>
