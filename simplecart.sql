@@ -2,8 +2,8 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: 2016-05-20 09:36:38
+-- Host: localhost:1433
+-- Generation Time: 2016-05-22 17:25:34
 -- 服务器版本： 5.5.42
 -- PHP Version: 5.6.10
 
@@ -3729,7 +3729,7 @@ CREATE TABLE `ips_category` (
 INSERT INTO `ips_category` (`cat_id`, `cat_name`, `cat_status`, `cat_type`, `cat_remark`, `cat_index`, `cat_details`, `cat_time`) VALUES
 (1, '测试', 0, 1, '4444666', 'index', 'details', '2016-05-09 08:48:17'),
 (2, '国内新闻', 1, 2, '', 'index', 'details', '2016-05-18 08:17:14'),
-(3, '下载分类', 1, 4, '', 'index', 'details', '2016-05-19 08:17:27');
+(3, '下载分类', 1, 3, '', 'index', 'details', '2016-05-19 08:17:27');
 
 -- --------------------------------------------------------
 
@@ -4110,7 +4110,7 @@ CREATE TABLE `ips_member` (
 --
 
 INSERT INTO `ips_member` (`id`, `account`, `nickname`, `password`, `bind_account`, `last_login_time`, `last_login_ip`, `login_count`, `verify`, `email`, `remark`, `create_time`, `update_time`, `status`, `type_id`, `info`, `salt`) VALUES
-(1, 'admin', '超级管理员', 'e10adc3949ba59abbe56e057f20f883e', '', '2016-05-20 11:34:56', '127.0.0.1', 224, '', '383542899@qq.com', 'test', '2013-10-15 03:48:33', '2013-10-17 11:42:28', 1, '', '', ''),
+(1, 'admin', '超级管理员', 'e10adc3949ba59abbe56e057f20f883e', '', '2016-05-22 22:55:59', '127.0.0.1', 225, '', '383542899@qq.com', 'test', '2013-10-15 03:48:33', '2013-10-17 11:42:28', 1, '', '', ''),
 (2, 'hello', '测试管理员', '48a0bbc767ef81d1daeb6ea5d4dedbca', '', '2016-05-06 15:27:36', '127.0.0.1', 1, '', '245995445@qq.com', '1212', '2013-10-17 06:45:49', '2016-05-06 15:24:53', 1, '', '', 'FqlmfEJGbzGevrCkbMBL'),
 (3, 'admin121', 'admin', '0192023a7bbd73250516f069df18b500', '', '', '', 0, '', '3835428991@qq.com', '2332432', '2014-01-14 07:26:12', '2014-01-14 15:28:50', 1, '', '', '');
 
@@ -4168,8 +4168,17 @@ CREATE TABLE `ips_product` (
   `product_keywords` varchar(100) NOT NULL,
   `product_desc` varchar(250) NOT NULL,
   `product_content` text NOT NULL,
-  `product_cat` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `product_cat` int(11) NOT NULL DEFAULT '0',
+  `product_sort` int(11) NOT NULL DEFAULT '10',
+  `product_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `ips_product`
+--
+
+INSERT INTO `ips_product` (`product_id`, `product_name`, `product_status`, `product_price`, `product_quantity`, `product_dir`, `product_img`, `product_keywords`, `product_desc`, `product_content`, `product_cat`, `product_sort`, `product_time`) VALUES
+(1, '测速产品', 1, '150.00', 99, '2016-05-22/', '5741ce0d7ba91.jpg', '321', '123', '', 1, 10, '2016-05-22 15:19:41');
 
 -- --------------------------------------------------------
 
@@ -4188,7 +4197,7 @@ CREATE TABLE `ips_session` (
 --
 
 INSERT INTO `ips_session` (`session_id`, `session_expire`, `session_data`) VALUES
-('fcec86303894c03dabe9a9ef16118840', 1463747085, 0x64326439373763353834343432373164396337383031383765393366383065357c613a323a7b733a31313a227665726966795f636f6465223b733a33323a226533626433656433383266343566656630363866643033393434323639623334223b733a31313a227665726966795f74696d65223b693a313436333731353239323b7d7569647c733a313a2231223b);
+('0f7ebc750edb9f35ee63cb8a896f387e', 1463948624, 0x64326439373763353834343432373164396337383031383765393366383065357c613a323a7b733a31313a227665726966795f636f6465223b733a33323a226533623537653037333837343133353666343964353831393037663838386635223b733a31313a227665726966795f74696d65223b693a313436333932383934393b7d7569647c733a313a2231223b);
 
 -- --------------------------------------------------------
 
@@ -4202,7 +4211,7 @@ CREATE TABLE `ips_weblog` (
   `log_action` varchar(100) NOT NULL,
   `log_sql` varchar(200) NOT NULL,
   `log_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM AUTO_INCREMENT=1881 DEFAULT CHARSET=utf8 COMMENT='操作日志'
+) ENGINE=MyISAM AUTO_INCREMENT=1892 DEFAULT CHARSET=utf8 COMMENT='操作日志'
 /*!50100 PARTITION BY RANGE (log_id)
 (PARTITION p0 VALUES LESS THAN (2000000) ENGINE = MyISAM,
  PARTITION p1 VALUES LESS THAN (4000000) ENGINE = MyISAM,
@@ -6069,7 +6078,18 @@ INSERT INTO `ips_weblog` (`log_id`, `log_admin`, `log_action`, `log_sql`, `log_t
 (1877, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-20 03:35:12'),
 (1878, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-20 03:35:13'),
 (1879, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-20 03:35:13'),
-(1880, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-20 03:35:13');
+(1880, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-20 03:35:13'),
+(1881, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 14:56:00'),
+(1882, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 14:56:00'),
+(1883, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 14:56:00'),
+(1884, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:01:24'),
+(1885, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:01:24'),
+(1886, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:01:24'),
+(1887, 'admin', 'Category/updateHandle', 'UPDATE `ips_category` SET `cat_name`=''下载分类'',`cat_type`=''3'',`cat_status`=''1'',`cat_index`=''index'',`cat_details`=''details'',`cat_remark`='''' WHERE `cat_id` = 3', '2016-05-22 15:04:08'),
+(1888, 'admin', 'Product/addHandle', 'SHOW COLUMNS FROM `ips_product`', '2016-05-22 15:18:44'),
+(1889, 'admin', 'Product/addHandle', 'INSERT INTO `ips_product` (`product_name`,`product_price`,`product_quantity`,`product_desc`,`product_keywords`,`product_status`,`product_sort`,`product_dir`,`product_img`) VALUES (''测速产品'',''150'',''99'',''1', '2016-05-22 15:19:41'),
+(1890, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:20:25'),
+(1891, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:22:02');
 
 -- --------------------------------------------------------
 
@@ -6532,12 +6552,12 @@ ALTER TABLE `ips_orderhistory`
 -- AUTO_INCREMENT for table `ips_product`
 --
 ALTER TABLE `ips_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ips_weblog`
 --
 ALTER TABLE `ips_weblog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1881;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1892;
 --
 -- AUTO_INCREMENT for table `ips_zones`
 --
