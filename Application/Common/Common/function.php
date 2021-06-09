@@ -11,6 +11,27 @@ if (is_readable($file_arr) == true) {
 }
 
 /**
+ * 返回路径文件列表
+ * @param string 文件目录
+ */
+function getFileList($directory) {
+	$files = array();
+	try {
+		$dir = new DirectoryIterator($directory);
+	} catch (Exception $e) {
+		throw new Exception($directory . ' is not readable');
+	}
+	foreach ($dir as $file) {
+		if ($file->isDot()) {
+			continue;
+		}
+
+		$files[] = $file->getFileName();
+	}
+	return $files;
+}
+
+/**
  *返回所有的国家信息列表，同时缓存查询到country_list
  *@param 无输入参数
  *@return array 返回国家数组
