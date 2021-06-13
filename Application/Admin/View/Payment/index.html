@@ -6,7 +6,6 @@
             <th>支付方法</th>
             <th>描述</th>
             <th>是否安装</th>
-            <th>排序</th>
             <th>--</th>
         </thead>
         <tbody>
@@ -16,14 +15,13 @@
                     <td>{$vo.title}</td>
                     <td>{$vo.desc}</td>
                     <td>{$vo.status|displayIcon}</td>
-                    <td>{$vo.sort}</td>
                     <td>
                         <eq name="vo.status" value="0">
                             <a class="uk-icon-plus-circle uk-icon-hover" title="安装" href="__CONTROLLER__/install/name/{$vo.name}"></a>
                             <else/>
-                            <a class="uk-icon-times-circle uk-icon-hover" title="卸载" onclick="confirmDelete('__CONTROLLER__/deleteHandle/{$vo.id}','确认卸载吗？')"></a>
+                            <a class="uk-icon-times-circle uk-icon-hover" title="卸载" onclick="confirmDelete('__CONTROLLER__/uninstall/name/{$vo.name}','确认卸载吗？')"></a>
                             &nbsp;|&nbsp;
-                            <a class="uk-icon-gear uk-icon-hover" title="配置" href="__CONTROLLER__/details/{$vo.id}"></a>
+                            <a class="uk-icon-gear uk-icon-hover" title="配置" href="__CONTROLLER__/details/name/{$vo.name}"></a>
                         </eq>
                     </td>
                 </tr>

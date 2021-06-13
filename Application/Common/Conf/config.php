@@ -4,7 +4,7 @@ $global_config = array(
 	//"DEFAULT_TIMEZONE"=>"Etc/GMT-8",//比格林尼治时间早8个小时，也就是北京时间,系统默认使用PRC中国时间
 
 	//'配置项'=>'配置值'
-	'MODULE_ALLOW_LIST' => array('Home', 'Admin'),
+	'MODULE_ALLOW_LIST' => array('Home', 'Admin', 'Payment'),
 	'DEFAULT_MODULE' => 'Home', //默认模块
 	//'URL_MODEL' => '1', //URL模式
 

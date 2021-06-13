@@ -9,11 +9,18 @@ class AcpayController extends Controller {
 	private $desc;
 
 	public function index() {
-		//$content = $this->fetch("index");
-		//return $content;
+
 		$arr['title'] = "321";
 		$arr['logo'] = "32321";
 		$arr['desc'] = "321312";
 		return $arr;
+
+	}
+
+	public function edit() {
+		$content = $this->fetch();
+		return $content;
+		//dump($content);
+		//return "dddd";
 	}
 }

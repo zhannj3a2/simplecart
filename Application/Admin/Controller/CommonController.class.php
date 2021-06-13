@@ -109,7 +109,7 @@ abstract class CommonController extends BaseController {
 	}
 
 	//cms保存
-	protected function cms_udpateHandle() {
+	protected function cms_updateHandle() {
 		$oop = M($this->model);
 		$oop->create();
 

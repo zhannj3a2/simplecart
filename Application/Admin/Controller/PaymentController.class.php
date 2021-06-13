@@ -6,26 +6,19 @@ use Think\Controller;
 class PaymentController extends CommonController {
 	public function _initialize() {
 		parent::_initialize();
-		$this->model = "payment";
 		$this->title_index = "网关列表";
-		$this->title_details = "网关详情";
+		$this->title_details = "网关配置";
 	}
 	public function index() {
 		$pay_list = getFileList("./Application/Payment/Controller");
-		$oop = M("payment");
 		foreach ($pay_list as $key => $value) {
 			$action = str_replace("Controller.class.php", "", $value);
 			$arr = A("Payment/" . $action)->index();
 			$arr['name'] = $action;
-			$result = $oop->where("pm_name='" . $action . "'")->find();
-			if ($result) {
+			if (file_exists("./Application/Payment/Config/" . $action . ".json")) {
 				$arr['status'] = 1;
-				$arr['id'] = $result['pm_id'];
-				$arr['sort'] = $result['pm_sort'];
 			} else {
 				$arr['status'] = 0;
-				$arr['id'] = "";
-				$arr['sort'] = 0;
 			}
 
 			$final[$key] = $arr;
@@ -37,20 +30,31 @@ class PaymentController extends CommonController {
 	}
 
 	public function install() {
-		try {
-			$oop = M("payment");
-			$data['pm_name'] = I("name");
-			if ($oop->add($data)) {
-				$this->success(L("add_success"));
-			} else {
-				$this->error(L("add_failed"));
-			}
-
-		} catch (\Exception $e) {
-			if ($e->getCode() == 23000) {
-				$this->error(L("unique_error"));
-			}
+		$file = "./Application/Payment/Config/" . I("name") . ".json";
+		if (file_exists($file)) {
+			$this->error("模块已经安装过！");
+		} else {
+			$arr['sort'] = 10;
+			$json_result = json_encode($arr);
+			file_put_contents($file, $json_result);
+			$this->success("安装成功！");
 		}
+	}
+
+	public function uninstall() {
+		$file = "./Application/Payment/Config/" . I("name") . ".json";
+		unlink($file);
+		$this->success("卸载成功！");
+	}
+
+	public function details() {
+		$file = "./Application/Payment/Config/" . I("name") . ".json";
+		$conn = file_get_contents($file);
+		$arr = json_decode($conn, true);
+		dump($arr);
+		$this->assign($arr);
+		$this->assign("main_title", $this->title_details);
+		$this->display();
 	}
 
 }
