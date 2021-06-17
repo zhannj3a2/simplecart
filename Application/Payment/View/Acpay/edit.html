@@ -1,18 +1,44 @@
-<tr>
-    <td>商户ID</td>
-    <td>
-        <input type="text" name="mid" value="{$mid}" required/>
-    </td>
-    <tr>
-        <tr>
-            <td>网站ID</td>
-            <td>
-                <input type="text" name="site_id" value="{$site_id}" required/>
-            </td>
+<layout name="layout" />
+<p>
+    <!-- Button trigger modal -->
+    <a href="__CONTROLLER__/index" class="uk-button">
+        {$Think.lang.back}
+    </a>
+</p>
+<div class="uk-overflow-container">
+    <form class="uk-form">
+        <table class="uk-table">
             <tr>
-                <tr>
-                    <td>Site key</td>
-                    <td>
-                        <input type="text" name="site_key" value="{$site_key}" required/>
-                    </td>
-                    <tr>
+                <td width=150>排序</td>
+                <td>
+                    <input type="text" name="sort" isInteger="true" required value="{$sort}" /> * 数字越大，排名越考前
+                </td>
+            </tr>
+            <tr>
+                <td>商户ID</td>
+                <td>
+                    <input type="text" name="mid" value="{$mid}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>网站ID</td>
+                <td>
+                    <input type="text" name="site_id" value="{$site_id}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Site key</td>
+                <td>
+                    <input type="text" name="site_key" value="{$site_key}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>--</td>
+                <td>
+                    <button class="uk-button uk-button-danger" type="submit">{$Think.lang.save}</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div style="clear:both"></div>

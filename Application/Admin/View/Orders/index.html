@@ -1,0 +1,50 @@
+<layout name="layout" />
+<form class="uk-form">
+    <div class="uk-grid">
+        <div class="uk-width-1-4">产品标题:
+            <input type="text" name="doc_title" placeholder="" class="uk-width-1-1">
+        </div>
+        <div class="uk-width-1-4">分类:
+            <select name="doc_cat">
+                <option value="">--</option>
+                <volist name=":getObjectList('category','cat_type=3')" id="vo">
+                    <option value="{$vo.cat_id}">{$vo.cat_name}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <p>
+        <button type="submit" class="uk-button uk-button-danger">{$Think.lang.search}</button>
+    </p>
+</form>
+{$page}
+<div class="uk-overflow-container">
+    <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
+        <thead>
+            <th>#</th>
+            <th>订单金额</th>
+            <th>订单时间</th>
+            <th>状态</th>
+            <th>是否发货</th>
+            <th>支付方法</th>
+            <th>来源IP</th>
+            <th>顾客</th>
+        </thead>
+        <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><a href="__CONTROLLER__/details/{$vo.order_id}">{$vo.order_id}</a></td>
+                    <td>{$vo.order_amount}</td>
+                    <td>{$vo.order_time}</td>
+                    <td>{$vo.order_status}</td>
+                    <td>{$vo.order_isdelivered}</td>
+                    <td>{$vo.order_paymethod}</td>
+                    <td>{$vo.order_ip}</td>
+                    <td>{$vo.cs_firstname}{$vo.cs_lastname}({$vo.cs_email})</td>
+                </tr>
+            </volist>
+        </tbody>
+    </table>
+</div>
+{$page}
+<div style="clear:both"></div>

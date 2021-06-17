@@ -2,8 +2,8 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:1433
--- Generation Time: 2016-05-22 17:25:34
+-- Host: localhost:3306
+-- Generation Time: 2016-05-25 11:37:57
 -- 服务器版本： 5.5.42
 -- PHP Version: 5.6.10
 
@@ -4110,7 +4110,7 @@ CREATE TABLE `ips_member` (
 --
 
 INSERT INTO `ips_member` (`id`, `account`, `nickname`, `password`, `bind_account`, `last_login_time`, `last_login_ip`, `login_count`, `verify`, `email`, `remark`, `create_time`, `update_time`, `status`, `type_id`, `info`, `salt`) VALUES
-(1, 'admin', '超级管理员', 'e10adc3949ba59abbe56e057f20f883e', '', '2016-05-22 22:55:59', '127.0.0.1', 225, '', '383542899@qq.com', 'test', '2013-10-15 03:48:33', '2013-10-17 11:42:28', 1, '', '', ''),
+(1, 'admin', '超级管理员', 'e10adc3949ba59abbe56e057f20f883e', '', '2016-05-25 13:59:51', '127.0.0.1', 227, '', '383542899@qq.com', 'test', '2013-10-15 03:48:33', '2013-10-17 11:42:28', 1, '', '', ''),
 (2, 'hello', '测试管理员', '48a0bbc767ef81d1daeb6ea5d4dedbca', '', '2016-05-06 15:27:36', '127.0.0.1', 1, '', '245995445@qq.com', '1212', '2013-10-17 06:45:49', '2016-05-06 15:24:53', 1, '', '', 'FqlmfEJGbzGevrCkbMBL'),
 (3, 'admin121', 'admin', '0192023a7bbd73250516f069df18b500', '', '', '', 0, '', '3835428991@qq.com', '2332432', '2014-01-14 07:26:12', '2014-01-14 15:28:50', 1, '', '', '');
 
@@ -4154,6 +4154,47 @@ CREATE TABLE `ips_orderhistory` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `ips_orders`
+--
+
+CREATE TABLE `ips_orders` (
+  `order_id` int(11) NOT NULL,
+  `order_amount` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `order_status` tinyint(4) NOT NULL DEFAULT '1',
+  `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_ip` varchar(40) NOT NULL,
+  `order_cs_id` int(11) NOT NULL,
+  `order_paymethod` varchar(50) NOT NULL,
+  `order_isdelivered` tinyint(1) NOT NULL DEFAULT '0',
+  `bill_addr_id` int(11) NOT NULL,
+  `bill_addr_cs_id` int(11) NOT NULL,
+  `bill_addr_country` char(2) NOT NULL,
+  `bill_addr_state` int(50) NOT NULL,
+  `bill_addr_city` int(50) NOT NULL,
+  `bill_addr_street` int(200) NOT NULL,
+  `bill_addr_zip` int(20) NOT NULL,
+  `bill_addr_phone` int(20) NOT NULL,
+  `bill_addr_firstname` int(50) NOT NULL,
+  `bill_addr_lastname` int(50) NOT NULL,
+  `bill_addr_gender` tinyint(1) NOT NULL,
+  `bill_addr_birthday` date NOT NULL,
+  `ship_addr_id` int(11) NOT NULL,
+  `ship_addr_cs_id` int(11) NOT NULL,
+  `ship_addr_country` char(2) NOT NULL,
+  `ship_addr_state` varchar(50) NOT NULL,
+  `ship_addr_city` varchar(50) NOT NULL,
+  `ship_addr_street` varchar(200) NOT NULL,
+  `ship_addr_zip` varchar(20) NOT NULL,
+  `ship_addr_phone` varchar(20) NOT NULL,
+  `ship_addr_firstname` varchar(50) NOT NULL,
+  `ship_addr_lastname` varchar(50) NOT NULL,
+  `ship_addr_gender` tinyint(1) NOT NULL,
+  `ship_addr_birthday` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `ips_product`
 --
 
@@ -4178,7 +4219,7 @@ CREATE TABLE `ips_product` (
 --
 
 INSERT INTO `ips_product` (`product_id`, `product_name`, `product_status`, `product_price`, `product_quantity`, `product_dir`, `product_img`, `product_keywords`, `product_desc`, `product_content`, `product_cat`, `product_sort`, `product_time`) VALUES
-(1, '测速产品', 1, '150.00', 99, '2016-05-22/', '5741ce0d7ba91.jpg', '321', '123', '', 1, 10, '2016-05-22 15:19:41');
+(1, '测速产品', 0, '150.00', 99, '2016-05-22/', '5741ce0d7ba91.jpg', '321', '123', '&lt;p&gt;56756765&lt;br/&gt;&lt;/p&gt;', 3, 10, '2016-05-22 15:19:41');
 
 -- --------------------------------------------------------
 
@@ -4197,7 +4238,7 @@ CREATE TABLE `ips_session` (
 --
 
 INSERT INTO `ips_session` (`session_id`, `session_expire`, `session_data`) VALUES
-('0f7ebc750edb9f35ee63cb8a896f387e', 1463948624, 0x64326439373763353834343432373164396337383031383765393366383065357c613a323a7b733a31313a227665726966795f636f6465223b733a33323a226533623537653037333837343133353666343964353831393037663838386635223b733a31313a227665726966795f74696d65223b693a313436333932383934393b7d7569647c733a313a2231223b);
+('37cdc9571955e229e3a563412b0670d1', 1464185860, 0x64326439373763353834343432373164396337383031383765393366383065357c613a323a7b733a31313a227665726966795f636f6465223b733a33323a226136623237353531323162326337666263343561353637356339356433636464223b733a31313a227665726966795f74696d65223b693a313436343135353938353b7d7569647c733a313a2231223b);
 
 -- --------------------------------------------------------
 
@@ -4211,7 +4252,7 @@ CREATE TABLE `ips_weblog` (
   `log_action` varchar(100) NOT NULL,
   `log_sql` varchar(200) NOT NULL,
   `log_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM AUTO_INCREMENT=1892 DEFAULT CHARSET=utf8 COMMENT='操作日志'
+) ENGINE=MyISAM AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8 COMMENT='操作日志'
 /*!50100 PARTITION BY RANGE (log_id)
 (PARTITION p0 VALUES LESS THAN (2000000) ENGINE = MyISAM,
  PARTITION p1 VALUES LESS THAN (4000000) ENGINE = MyISAM,
@@ -6089,7 +6130,46 @@ INSERT INTO `ips_weblog` (`log_id`, `log_admin`, `log_action`, `log_sql`, `log_t
 (1888, 'admin', 'Product/addHandle', 'SHOW COLUMNS FROM `ips_product`', '2016-05-22 15:18:44'),
 (1889, 'admin', 'Product/addHandle', 'INSERT INTO `ips_product` (`product_name`,`product_price`,`product_quantity`,`product_desc`,`product_keywords`,`product_status`,`product_sort`,`product_dir`,`product_img`) VALUES (''测速产品'',''150'',''99'',''1', '2016-05-22 15:19:41'),
 (1890, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:20:25'),
-(1891, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:22:02');
+(1891, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-22 15:22:02'),
+(1892, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 03:23:13'),
+(1893, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 03:23:13'),
+(1894, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 03:23:13'),
+(1895, 'admin', 'Product/updateHandle', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 03:40:14'),
+(1896, 'admin', 'Product/updateHandle', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 03:41:23'),
+(1897, 'admin', 'Product/updateHandle', 'UPDATE `ips_product` SET `product_name`=''测速产品'',`product_cat`=''3'',`product_price`=''150.00'',`product_quantity`=''99'',`product_desc`=''123'',`product_keywords`=''321'',`product_status`=''1'',`product_sort`=''10''', '2016-05-24 03:53:37'),
+(1898, 'admin', 'Product/updateHandle', 'UPDATE `ips_product` SET `product_name`=''测速产品'',`product_cat`=''3'',`product_price`=''150.00'',`product_quantity`=''99'',`product_desc`=''123'',`product_keywords`=''321'',`product_status`=''0'',`product_sort`=''10''', '2016-05-24 04:03:20'),
+(1899, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:11:53'),
+(1900, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:12:46'),
+(1901, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:13:51'),
+(1902, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:24:54'),
+(1903, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:24:54'),
+(1904, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:24:54'),
+(1905, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:20'),
+(1906, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:20'),
+(1907, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:20'),
+(1908, 'admin', 'Payment/uninstall', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:23'),
+(1909, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:27'),
+(1910, 'admin', 'Payment/uninstall', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:34'),
+(1911, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-24 07:26:38'),
+(1912, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 05:59:52'),
+(1913, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 05:59:52'),
+(1914, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 05:59:52'),
+(1915, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:16:33'),
+(1916, 'admin', 'Payment/updateHandle', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:16:38'),
+(1917, 'admin', 'Payment/updateHandle', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:18:31'),
+(1918, 'admin', 'Payment/updateHandle', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:22:47'),
+(1919, 'admin', 'Payment/uninstall', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:24:31'),
+(1920, 'admin', 'Payment/install', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:24:37'),
+(1921, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:24:58'),
+(1922, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:41:14'),
+(1923, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:41:41'),
+(1924, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:41:41'),
+(1925, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:41:41'),
+(1926, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:58:06'),
+(1927, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:58:08'),
+(1928, 'admin', 'Index/top', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:58:09'),
+(1929, 'admin', 'Index/right', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:58:09'),
+(1930, 'admin', 'Index/left', 'SELECT * FROM `ips_member` WHERE `id` = 1 LIMIT 1  ', '2016-05-25 07:58:09');
 
 -- --------------------------------------------------------
 
@@ -6453,6 +6533,12 @@ ALTER TABLE `ips_orderhistory`
   ADD PRIMARY KEY (`oh_id`);
 
 --
+-- Indexes for table `ips_orders`
+--
+ALTER TABLE `ips_orders`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `ips_product`
 --
 ALTER TABLE `ips_product`
@@ -6549,6 +6635,11 @@ ALTER TABLE `ips_orderdetails`
 ALTER TABLE `ips_orderhistory`
   MODIFY `oh_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `ips_orders`
+--
+ALTER TABLE `ips_orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `ips_product`
 --
 ALTER TABLE `ips_product`
@@ -6557,7 +6648,7 @@ ALTER TABLE `ips_product`
 -- AUTO_INCREMENT for table `ips_weblog`
 --
 ALTER TABLE `ips_weblog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1892;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1931;
 --
 -- AUTO_INCREMENT for table `ips_zones`
 --

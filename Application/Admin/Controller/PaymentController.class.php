@@ -35,6 +35,7 @@ class PaymentController extends CommonController {
 			$this->error("模块已经安装过！");
 		} else {
 			$arr['sort'] = 10;
+			$arr['name'] = I("name");
 			$json_result = json_encode($arr);
 			file_put_contents($file, $json_result);
 			$this->success("安装成功！");
@@ -51,10 +52,21 @@ class PaymentController extends CommonController {
 		$file = "./Application/Payment/Config/" . I("name") . ".json";
 		$conn = file_get_contents($file);
 		$arr = json_decode($conn, true);
-		dump($arr);
+		//dump($arr);
 		$this->assign($arr);
 		$this->assign("main_title", $this->title_details);
-		$this->display();
+		$this->display(I("name"));
+	}
+
+	public function updateHandle() {
+		$file = "./Application/Payment/Config/" . I("name") . ".json";
+		if (file_exists($file)) {
+			$json_result = json_encode($_POST);
+			file_put_contents($file, $json_result);
+			$this->success("保存成功！");
+		} else {
+			$this->error("模块尚未安装！");
+		}
 	}
 
 }
